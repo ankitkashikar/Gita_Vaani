@@ -10,20 +10,15 @@ export function useGitaAI() {
     setLoading(true)
     setError(null)
 
-    const apiKey = import.meta.env.VITE_ANTHROPIC_API_KEY
-
     try {
       const verseContext = buildVerseContext(question)
       const systemPrompt = buildSystemPrompt(language, verseContext)
 
-      const res = await fetch('https://api.anthropic.com/v1/messages', {
+      // ✅ Call OUR serverless function — not Anthropic directly
+      // This fixes the CORS "Failed to fetch" error
+      const res = await fetch('/api/guidance', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          ...(apiKey && apiKey !== 'your_anthropic_api_key_here'
-            ? { 'x-api-key': apiKey, 'anthropic-version': '2023-06-01' }
-            : {}),
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           model: 'claude-sonnet-4-20250514',
           max_tokens: 1200,
@@ -34,7 +29,7 @@ export function useGitaAI() {
 
       if (!res.ok) {
         const err = await res.json().catch(() => ({}))
-        throw new Error(err?.error?.message || `API error ${res.status}`)
+        throw new Error(err?.error || `Server error ${res.status}`)
       }
 
       const data = await res.json()
@@ -47,7 +42,10 @@ export function useGitaAI() {
         throw new Error('Response could not be parsed. Please try again.')
       }
 
-      return { ok: true, data: { ...parsed, question, language, savedAt: Date.now() } }
+      return {
+        ok: true,
+        data: { ...parsed, question, language, savedAt: Date.now() }
+      }
 
     } catch (e) {
       setError(e.message)
