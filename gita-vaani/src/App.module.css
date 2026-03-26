@@ -1,0 +1,40 @@
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(254,250,243,0.96);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 1rem 0;
+  margin: 0 -1rem;
+}
+.brand { display: flex; align-items: center; gap: 10px; margin-bottom: 0.9rem; }
+.om { font-size: 2rem; color: var(--saffron); line-height: 1; flex-shrink: 0; }
+.brandName { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 600; color: var(--deep); line-height: 1.1; }
+.brandSub { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.04em; }
+.tabs { display: flex; gap: 4px; }
+.tab {
+  flex: 1; display: flex; align-items: center; justify-content: center; gap: 5px;
+  padding: 8px 6px 10px; border: none; background: transparent;
+  font-family: var(--font-body); font-size: 0.85rem; color: var(--muted);
+  cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.18s;
+  position: relative;
+}
+.tab:hover { color: var(--saffron); }
+.tabActive { color: var(--saffron); border-bottom-color: var(--saffron); font-weight: 500; }
+.tabIcon { font-size: 14px; }
+.badge {
+  background: var(--saffron); color: #fff; font-size: 0.65rem;
+  font-weight: 500; padding: 1px 5px; border-radius: 10px; line-height: 1.4;
+}
+.main { flex: 1; padding: 1.5rem 0 2rem; }
+.footer { text-align: center; padding: 1.5rem 0; border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--muted); }

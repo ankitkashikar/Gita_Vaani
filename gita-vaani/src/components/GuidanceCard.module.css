@@ -1,0 +1,75 @@
+.card {
+  background: var(--parchment); border: 1px solid var(--border2);
+  border-radius: 14px; overflow: hidden;
+}
+
+/* Header */
+.header {
+  background: var(--saffron); padding: 0.75rem 1.2rem;
+  display: flex; align-items: center; gap: 10px;
+}
+.avatar {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: rgba(255,255,255,0.2); display: flex;
+  align-items: center; justify-content: center;
+  font-family: var(--font-devanagari); font-size: 1.1rem; color: #fff;
+  flex-shrink: 0;
+}
+.headerTitle {
+  display: block; color: #fff;
+  font-family: var(--font-serif); font-size: 1rem; font-weight: 500;
+}
+.headerSub { display: block; color: rgba(255,255,255,0.75); font-size: 0.72rem; }
+
+/* Body */
+.body { padding: 1.25rem; display: flex; flex-direction: column; gap: 0.9rem; }
+
+/* Reflection */
+.reflection {
+  font-style: italic; color: var(--muted);
+  font-size: 0.97rem; line-height: 1.7;
+  padding-left: 0.9rem; border-left: 2px solid var(--border2);
+}
+
+/* Shloka */
+.shlokaBox {
+  background: var(--gold-light); border-radius: 10px;
+  padding: 1rem 1.1rem; border: 1px solid rgba(180,120,40,0.25);
+  display: flex; flex-direction: column; gap: 0.35rem;
+}
+.verseRef {
+  font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--saffron);
+}
+.sanskrit {
+  font-size: 1.05rem; color: var(--deep); line-height: 1.75;
+  white-space: pre-line;
+}
+.translation { font-size: 0.88rem; color: var(--muted); font-style: italic; line-height: 1.55; }
+
+/* Section */
+.sectionLabel {
+  font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--lotus);
+}
+.sectionBody { font-size: 0.97rem; color: var(--ink); line-height: 1.7; }
+
+/* Steps */
+.steps { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; padding: 0; }
+.step { display: flex; align-items: flex-start; gap: 10px; font-size: 0.95rem; color: var(--ink); line-height: 1.6; }
+.stepNum {
+  min-width: 22px; height: 22px; border-radius: 50%;
+  background: var(--saffron); color: #fff;
+  font-size: 0.72rem; font-weight: 500;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 2px;
+}
+
+/* Takeaway */
+.takeaway {
+  background: var(--lotus-light); border-radius: 10px;
+  padding: 0.9rem 1.1rem; margin: 0;
+  font-family: var(--font-serif); font-size: 1.1rem;
+  color: var(--lotus); font-style: italic;
+  text-align: center; line-height: 1.55;
+}

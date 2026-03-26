@@ -1,0 +1,78 @@
+.wrap { display: flex; flex-direction: column; gap: 1rem; }
+
+/* ── Chips ── */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  display: flex; align-items: center; gap: 6px;
+  padding: 7px 14px; border-radius: 20px;
+  border: 1px solid var(--border2); background: var(--parchment2);
+  font-size: 0.85rem; color: var(--ink); cursor: pointer;
+  font-family: var(--font-body);
+  transition: all 0.18s;
+}
+.chip:hover { background: var(--gold-light); border-color: var(--saffron); }
+.chipSel { background: var(--saffron) !important; color: #fff !important; border-color: var(--saffron) !important; }
+.chipIcon { font-size: 14px; }
+
+/* ── Language row ── */
+.langRow { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.langLabel { font-size: 0.8rem; color: var(--muted); }
+.langBtn {
+  padding: 5px 12px; border-radius: 6px;
+  border: 1px solid var(--border2); background: transparent;
+  font-size: 0.78rem; color: var(--muted); cursor: pointer;
+  font-family: var(--font-body); transition: all 0.15s;
+}
+.langBtn:hover { background: var(--parchment2); }
+.langSel { background: var(--lotus) !important; color: #fff !important; border-color: var(--lotus) !important; }
+
+/* ── Textarea ── */
+.textarea {
+  width: 100%; border: 1px solid var(--border2); border-radius: 12px;
+  padding: 0.9rem 1rem; font-family: var(--font-body);
+  font-size: 0.97rem; color: var(--ink); background: var(--parchment);
+  resize: none; outline: none; line-height: 1.6; transition: border-color 0.2s;
+}
+.textarea:focus { border-color: var(--saffron); }
+.textarea::placeholder { color: #B8956A; font-style: italic; }
+
+/* ── Seek button ── */
+.seekBtn {
+  width: 100%; background: var(--saffron); color: #fff;
+  border: none; border-radius: 12px; padding: 0.9rem;
+  font-family: var(--font-serif); font-size: 1.2rem; font-weight: 500;
+  cursor: pointer; letter-spacing: 0.03em; transition: opacity 0.2s;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.seekBtn:hover:not(:disabled) { opacity: 0.88; }
+.seekBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ── Loading dots ── */
+.loading { display: flex; align-items: center; }
+.dot {
+  width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.7);
+  display: inline-block; animation: pulse 1.4s infinite;
+}
+.dot:nth-child(2) { animation-delay: 0.2s; margin: 0 4px; }
+.dot:nth-child(3) { animation-delay: 0.4s; margin-right: 0; }
+
+/* ── Error ── */
+.error {
+  color: #A0390A; font-size: 0.88rem; padding: 0.6rem 0.9rem;
+  background: #FEF0E7; border-radius: 8px;
+}
+
+/* ── Card wrap ── */
+.cardWrap { display: flex; flex-direction: column; gap: 0.75rem; }
+
+/* ── Action buttons ── */
+.actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.actBtn {
+  padding: 7px 14px; border-radius: 8px;
+  border: 1px solid var(--border2); background: transparent;
+  font-size: 0.82rem; color: var(--ink); cursor: pointer;
+  font-family: var(--font-body); transition: all 0.15s;
+}
+.actBtn:hover { background: var(--parchment2); }
+.actSaved  { background: var(--gold-light) !important; border-color: var(--gold) !important; color: var(--gold) !important; }
+.actSpeaking { background: var(--saffron) !important; color: #fff !important; border-color: var(--saffron) !important; }
