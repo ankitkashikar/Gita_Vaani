@@ -2,32 +2,58 @@ import { useState } from 'react'
 import { findBestShloka, buildOfflineResponse } from '../data/shlokaDB.js'
 
 export function useGitaAI() {
-  const [loading, setLoading] = useState(false)
-  const [error, setError]   = useState(null)
 
-  async function seekGuidance(question, language) {
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+
+  async function seekGuidance(question, language = "english") {
+
+    if (!question || question.trim() === "") {
+      return { ok: false, error: "Please ask a question." }
+    }
+
     setLoading(true)
     setError(null)
 
     try {
-      // Simulate a thoughtful pause (makes it feel more human)
+
+      // Small pause to feel natural
       await new Promise(resolve => setTimeout(resolve, 1200))
 
-      // Find the best matching shloka from our local database
+      // Find matching shloka
       const shloka = findBestShloka(question)
 
-      // Build the full response in the chosen language
+      if (!shloka) {
+        throw new Error("No matching shloka found")
+      }
+
+      // Build response
       const response = buildOfflineResponse(shloka, language, question)
 
-      return { ok: true, data: response }
+      return {
+        ok: true,
+        data: response
+      }
 
     } catch (e) {
-      setError('Kuch gadbad ho gayi. Dobara try karo. 🙏')
-      return { ok: false, error: e.message }
+
+      console.error("GitaAI error:", e)
+
+      setError("Kuch gadbad ho gayi. Dobara try karo. 🙏")
+
+      return {
+        ok: false,
+        error: e.message
+      }
+
     } finally {
       setLoading(false)
     }
   }
 
-  return { seekGuidance, loading, error }
+  return {
+    seekGuidance,
+    loading,
+    error
+  }
 }
