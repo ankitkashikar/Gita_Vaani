@@ -1,32 +1,26 @@
-import { useState, useEffect } from 'react'
+import { useState, useRef } from 'react'
 
-const KEY = 'gitavaani_saved'
+export function useSpeech() {
+  const [speaking, setSpeaking] = useState(false)
+  const uttRef = useRef(null)
 
-export function useSaved() {
-  const [saved, setSaved] = useState([])
-
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem(KEY)
-      if (raw) setSaved(JSON.parse(raw))
-    } catch { /* ignore */ }
-  }, [])
-
-  function persist(items) {
-    setSaved(items)
-    try { localStorage.setItem(KEY, JSON.stringify(items)) } catch { /* ignore */ }
+  function speak(guidance, language) {
+    if (!('speechSynthesis' in window)) return
+    if (speaking) { window.speechSynthesis.cancel(); setSpeaking(false); return }
+    const parts = [
+      guidance.reflection, guidance.verse_ref + '.',
+      guidance.verse_translation, guidance.gita_bridge, guidance.takeaway,
+    ].filter(Boolean).join(' ')
+    const utt = new SpeechSynthesisUtterance(parts)
+    utt.lang  = language === 'hindi' ? 'hi-IN' : 'en-IN'
+    utt.rate  = 0.82; utt.pitch = 0.88
+    utt.onend  = () => setSpeaking(false)
+    utt.onerror = () => setSpeaking(false)
+    window.speechSynthesis.speak(utt)
+    uttRef.current = utt
+    setSpeaking(true)
   }
 
-  function saveGuidance(item) {
-    const already = saved.find(s => s.savedAt === item.savedAt)
-    if (already) return false
-    persist([item, ...saved])
-    return true
-  }
-
-  function removeGuidance(savedAt) {
-    persist(saved.filter(s => s.savedAt !== savedAt))
-  }
-
-  return { saved, saveGuidance, removeGuidance }
+  function stop() { window.speechSynthesis.cancel(); setSpeaking(false) }
+  return { speak, stop, speaking }
 }
